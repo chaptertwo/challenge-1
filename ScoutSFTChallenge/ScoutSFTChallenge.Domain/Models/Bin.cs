@@ -14,5 +14,11 @@ namespace ScoutSFTChallenge.Domain.Models
         [DisplayName("Bin Name")]
         [Required]
         public string BinName { get; set; }
+        public List<Product> Products { get; set; }
+
+        public Bin()
+        {
+            Products = new List<Product>();
+        }
     }
 }

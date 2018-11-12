@@ -1,0 +1,69 @@
+﻿@model ScoutSFTChallenge.UI.Models.OrderVM
+@{
+    ViewBag.Title = "Create Order";
+}
+
+<h2 style="text-align:center">Create Order</h2>
+<div class="container-fluid wireframe">
+    @using (Html.BeginForm("CreateOrder", "Inventory", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Order Number</label>
+                            @Html.TextBoxFor(a => a.Order.OrderNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Order.OrderNumber, "", new { @style = "color:red" })
+                        </div>
+                    </div>
+                
+                
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.Order.CustomerName)
+                            @Html.TextBoxFor(a => a.Order.CustomerName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Order.CustomerName, "", new { @style = "color:red" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(a => a.Order.CustomerAddress)
+                        @Html.TextBoxFor(a => a.Order.CustomerAddress, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.Order.CustomerAddress, "", new { @style = "color:red" })
+                    </div>
+                    </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            @Html.LabelFor(a => a.Order.DateOrdered)
+                            @Html.TextBoxFor(a => a.Order.DateOrdered, new { @class = "form-control", type = "date", style="margin-bottom:10px" })
+                            @Html.ValidationMessageFor(a => a.Order.DateOrdered, "", new { @style = "color:red" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Product SKU</label>
+                            @Html.TextBoxFor(a => a.Product.SKU, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Product.SKU, "", new { @style = "color:red" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Order Quantity</label>
+                            @Html.TextBoxFor(a => a.OrderLine.OrderQuantity, new { @class = "form-control", type = "number" })
+                            @Html.ValidationMessageFor(a => a.OrderLine.OrderQuantity, "", new { @style = "color:red" })
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+        <button type="submit" class="pull-right btn btn-primary">Submit</button><a href="~/Inventory/AllOrders" class="btn btn-default">Cancel</a>
+    }
+</div>

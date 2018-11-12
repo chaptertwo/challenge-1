@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-
+using ScoutSFTChallenge.Domain.Interfaces;
 
 namespace ScoutSFTChallenge.Data
 {
-    public class OrderRepository
+    public class OrderRepository : IOrderRepository
     {
         private const string CONN_STRING = "DefaultConnection";
 
@@ -45,8 +45,8 @@ namespace ScoutSFTChallenge.Data
 
         public Order Insert(Order order)
         {
-            const string sql = "INSERT INTO [Order] (OrderId, DateOrdered, CustomerName, CustomerAddress, OrderNumber, Total) " +
-                "VALUES (@OrderId, @DateOrdered, @CustomerName, @CustomerAddress, @OrderNumber, @Total); " +
+            const string sql = "INSERT INTO [Order] (DateOrdered, CustomerName, CustomerAddress, OrderNumber) " +
+                "VALUES (@DateOrdered, @CustomerName, @CustomerAddress, @OrderNumber); " +
                 "SELECT SCOPE_IDENTITY()";
 
             using (var conn = Database.GetOpenConnection(CONN_STRING))

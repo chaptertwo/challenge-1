@@ -1,0 +1,58 @@
+﻿@model ScoutSFTChallenge.UI.Models.InventoryVM
+
+@{
+    ViewBag.Title = "Bin Manager";
+}
+
+<div class="container-fluid wireframe" style="margin-top:50px;">
+    @using (Html.BeginForm("CreateProduct", "BinProduct", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.Product.SKU)
+                            @Html.TextBoxFor(a => a.Product.SKU, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Product.SKU, "", new { @style = "color:red" })
+                            @Html.HiddenFor(a => a.Product.SKU)
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.Product.ProductDescription)
+                            @Html.TextAreaFor(a => a.Product.ProductDescription, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Product.ProductDescription, "", new { @style = "color:red" })
+                            @Html.HiddenFor(a => a.Product.ProductDescription)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            @Html.TextBoxFor(a => a.Product.BinCount, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Product.BinCount, "", new { @style = "color:red" })
+                            @Html.HiddenFor(a => a.Product.BinCount)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Bin</label>
+                            @Html.DropDownListFor(a => a.SelectBinId, Model.BinList, new { @class = "form-control" })
+                        </div>
+                    </div><div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(a => a.Product.Price)
+                        @Html.TextBoxFor(a => a.Product.Price, new { @class = "form-control" })
+                    </div>
+                </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="pull-right btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

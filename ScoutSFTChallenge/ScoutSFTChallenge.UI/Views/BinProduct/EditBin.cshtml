@@ -1,0 +1,61 @@
+﻿@model ScoutSFTChallenge.UI.Models.BinProductVM
+@{
+    ViewBag.Title = "EditBin";
+}
+
+<h2 style="text-align:center">Edit Bin</h2>
+<div class="container-fluid wireframe">
+    @using (Html.BeginForm("EditBin", "BinProduct", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.Bin.BinName)
+                            @Html.TextBoxFor(a => a.Bin.BinName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Bin.BinName, "", new { @style = "color:red" })
+                            @Html.HiddenFor(a => a.Bin.BinId)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div><button type="submit" class="pull-right btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+
+        <div class="wireframe">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th align="center">Product Description</th>
+                        <th>SKU</th>
+                        <th>QTY in Bin</th>
+                    </tr>
+                </thead>
+
+               
+                    <tbody>
+                        @for (int i = 0; i < Model.Bin.Products.Count; i++)
+                        {
+                        <tr>
+                            <td valign="middle">@Model.Bin.Products[i].ProductDescription  
+                           
+                            <td>@Model.Bin.Products[i].SKU</td>
+                            <td>@Html.TextBoxFor(a => Model.Bin.Products[i].BinCount, null, new { type = "number", @class = "form-control", id = Model.Bin.Products[i].BinCount, name = Model.Bin.Products[i].BinCount })  </td>
+                            <input type="hidden" name="@Model.Bin.Products[i].ProductId" value="@Model.Bin.Products[i].BinCount" />
+                            @Html.HiddenFor(a => Model.Bin.Products[i].ProductId)
+                            @Html.HiddenFor(a => Model.Bin.Products[i].BinCount)
+                        </tr>
+                        }
+                    </tbody>
+
+
+
+            </table>
+        </div>}
+</div>
+
+

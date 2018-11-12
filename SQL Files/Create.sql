@@ -1,6 +1,8 @@
 USE Master 
 GO
 
+drop database ScoutSFTChallenge
+
 CREATE DATABASE ScoutSFTChallenge
 GO
 
@@ -25,17 +27,17 @@ CREATE TABLE Product(
 
 ALTER TABLE Product ADD CONSTRAINT U_SKU UNIQUE(SKU)
 
-CREATE TABLE BinProduct(
-	BinId INT NOT NULL,
-	ProductId INT NOT NULL,
-	PRIMARY KEY (BinId, ProductId),
-	CONSTRAINT FK_Bin_ID FOREIGN KEY (BinId) REFERENCES Bin(BinId),
-	CONSTRAINT FK_Product_ID FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
-	)
+--CREATE TABLE BinProduct(
+--	BinId INT NOT NULL,
+--	ProductId INT NOT NULL,
+--	PRIMARY KEY (BinId, ProductId),
+--	CONSTRAINT FK_Bin_ID FOREIGN KEY (BinId) REFERENCES Bin(BinId),
+--	CONSTRAINT FK_Product_ID FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
+--	)
 
 CREATE TABLE Inventory(
 	InventoryId INT IDENTITY (1,1) PRIMARY KEY,
-	BinId INT FOREIGN KEY REFERENCES Bin(BinId) NOT NULL,
+	BinId INT FOREIGN KEY REFERENCES Bin(BinId),
 	ProductId INT FOREIGN KEY REFERENCES Product(ProductId) NOT NULL,
 	InventoryQuantity INT NOT NULL
 	)
@@ -48,7 +50,7 @@ CREATE TABLE [Order](
 	CustomerName NVARCHAR(30) NOT NULL,
 	CustomerAddress NVARCHAR(160) NOT NULL,
 	OrderNumber NVARCHAR(60) NOT NULL,
-	Total DECIMAL(10,2) NOT NULL
+	Total DECIMAL(10,2)
 	)
 
 ALTER TABLE [Order] ADD CONSTRAINT U_OrderNumber UNIQUE(OrderNumber)
@@ -58,6 +60,7 @@ CREATE TABLE OrderLine(
 	OrderId INT FOREIGN KEY REFERENCES [Order](OrderId) NOT NULL,
 	ProductId INT FOREIGN KEY REFERENCES Product(ProductId) NOT NULL,
 	OrderQuantity INT NOT NULL,
-	PricePerLine DECIMAL(10,2) NOT NULL
+	PricePerLine DECIMAL(10,2)
 	)
 
+	

@@ -11,12 +11,16 @@ namespace ScoutSFTChallenge.Domain.Models
     public class Product
     {
         public int ProductId { get; set; }
+        [StringLength(8, MinimumLength = 6)]
         [Required]
         public string SKU { get; set; }
-        [Required]
         [DisplayName("Description")]
         public string ProductDescription { get; set; }
         [Required]
         public decimal Price { get; set; }
+        public int BinCount { get; set; }
+
+        
+
     }
 }

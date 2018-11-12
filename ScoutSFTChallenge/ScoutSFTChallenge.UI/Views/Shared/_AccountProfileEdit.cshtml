@@ -1,0 +1,20 @@
+﻿@model ScoutSFTChallenge.UI.Models.BinProductVM
+
+@using (Html.BeginForm("EditBin", "BinProduct", FormMethod.Post, new { id = "form-editBin", @class = "full-form" }))
+{
+    @Html.ValidationSummary()
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Bin.BinName)
+                        @Html.TextBoxFor(a => a.Bin.BinName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.Bin.BinName, "", new { @style = "color:red" })
+                        @Html.HiddenFor(a => a.Bin.BinId)
+                    </div>
+                </div>
+            </div>
+        </div><button type="submit" class="pull-left">Submit</button>
+    </div>
+}

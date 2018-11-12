@@ -1,7 +1,16 @@
 USE ScoutSFTChallenge
 GO
 
-SET IDENTITY_INSERT Bin ON
+	Create Procedure DbReset As
+	Begin
+		Delete From OrderLine;
+		Delete From [Order];
+		Delete From Inventory;
+		Delete From BinProduct;
+		Delete From Product;
+		Delete From Bin;
+
+	SET IDENTITY_INSERT Bin ON
 INSERT INTO Bin(BinId, BinName)
 VALUES (1, 'S34A1'), (2, 'S43B2'), (3, 'S54C3')
 SET IDENTITY_INSERT Bin OFF
@@ -15,7 +24,6 @@ SET IDENTITY_INSERT Product OFF
 
 SET IDENTITY_INSERT Inventory ON
 INSERT INTO Inventory(InventoryId, BinId, ProductId, InventoryQuantity)
---maybe this should be called binQuantity
 VALUES(1, 1, 1, 33), (2, 1, 2, 12), (3, 2, 1, 10), (4, 2, 2, 9), (5, 3, 2, 10)
 SET IDENTITY_INSERT Inventory OFF
 
@@ -30,3 +38,6 @@ SET IDENTITY_INSERT OrderLine ON
 INSERT INTO OrderLine(OrderLineId, OrderId, ProductId, OrderQuantity, PricePerLine)
 VALUES (1, 1, 1, 2, 2299.98), (2, 1, 2, 3, 2549.97), (3, 2, 2, 1, 849.99), (4, 3, 3, 5, 3999.95)
 SET IDENTITY_INSERT OrderLine OFF
+
+END
+

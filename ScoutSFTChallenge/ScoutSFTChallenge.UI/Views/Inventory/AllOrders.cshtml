@@ -1,0 +1,42 @@
+﻿@model ScoutSFTChallenge.UI.Models.OrderVM
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2 style="text-align:center">Orders</h2>
+@Html.ActionLink("Add an Order", "CreateOrder", "Inventory", new { @class = "btn btn-primary" })
+<div class="wireframe container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th></th>
+                <th></th>
+                <th>Customer Name</th>
+                <th>Customer Address</th>
+                <th>Date Ordered</th>
+                <th align="center">Total</th>
+            </tr>
+        </thead>
+
+        @foreach (var o in Model.Orders)
+        {
+            <tbody>
+                <tr>
+                    <td valign="middle">
+                        @o.OrderNumber
+                    </td>
+                    <td>
+                        @Html.ActionLink("View Details", "ViewOrderLine", "Inventory", new { id = o.OrderId }, new { @class = "btn btn-secondary", style = "font-size:smaller" })
+                       </td><td>
+                        @Html.ActionLink("Edit Order", "EditOrderLine", "Inventory", new { id = o.OrderId }, new { @class = "btn btn-primary", style = "font-size:smaller" })
+                    </td>
+                    <td>@o.CustomerName</td>
+                    <td valign="middle">@o.CustomerAddress</td>
+                    <td>@o.DateOrdered</td>
+                    <td>$@o.Total</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

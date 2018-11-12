@@ -1,0 +1,101 @@
+﻿@model ScoutSFTChallenge.UI.Models.InventoryVM
+@{
+    ViewBag.Title = "Inventory";
+}
+
+@*<h2>Inventory</h2>*@
+@*<div>
+    <table id="inventoryTable" class="table-striped">
+        <tr>
+            <th>Bin Name</th>
+            <th>Product</th>
+            <th>Product QTY in Bin</th>
+        </tr>
+    </table>
+</div>*@
+
+
+<div id="app"></div>
+
+
+
+
+<div class="modal fade" id="AccountEditModal" tabindex="-1" role="dialog" aria-labelledby="AccountEditModalLabel">
+    <div class="modal-dialog modalAccountEdit" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+                <h3><strong>Edit Account Profile - <span class="accountname"></span></strong></h3>
+            </div>
+
+            <div class="modal-body">
+                <div id="formContent">
+                    @Html.Partial("_AccountProfileEdit", new ScoutSFTChallenge.UI.Models.BinProductVM())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+    let ajaxResultArray = [];
+
+    $(document).ready(function () {
+        $("tr:has(td)").remove();
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:54602/inventory',
+            success: function (indexViewModel) {
+                $.each(indexViewModel, function (index, vm) {
+                    ajaxResultArray.push(vm);
+                });
+                console.log(ajaxResultArray);
+                SetTable(ajaxResultArray);
+            }
+        });
+
+
+    });
+    //if (bin.BinName[index].val = bin.BinName[index + 1].val)
+
+    //function DetermineNewBin(bin, index) {
+    //    if ([index].BinName != [index + 1].BinName) {
+    //        return 'test'
+    //    }
+    //    else {
+    //        return bin.BinName
+    //    }
+        
+    //}
+
+    function TableTemplate(arr) {
+        return `
+            <tr><td>${arr.BinName}</td>
+                <td>${arr.ProductDescription}</td><td>Bin Quantity: ${arr.InventoryQuantity}</td></tr>`
+    }
+
+    function SetTable(ajaxResultArray) {
+        document.getElementById("app").innerHTML = `
+        <h1 style="text-align:center; text-decoration:underline;"> Inventory (${ajaxResultArray.length} items)</h1>
+        <table class="table table-striped"><thead><tr>
+        <th>Bin Name</th><th>Product</th><th>Product Quantity</th>
+        </tr></thead>
+        <tbody>
+        ${ajaxResultArray.map(TableTemplate).join('')}
+        </tbody>
+        </table>
+        `
+    }
+
+
+</script>
+

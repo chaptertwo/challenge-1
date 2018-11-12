@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScoutSFTChallenge.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace ScoutSFTChallenge.Domain.Interfaces
 {
     public interface IProductRepository
     {
+        IEnumerable<Product> All();
+        Product Insert(Product product);
     }
 }

@@ -1,0 +1,61 @@
+﻿@model ScoutSFTChallenge.UI.Models.InventoryVM
+@{
+    ViewBag.Title = "Bin Manager";
+}
+
+<h2 style="text-align:center">Bin Manager</h2>
+@Html.ActionLink("Add a Bin", "CreateBin", "BinProduct", new { @class = "btn btn-primary" })
+@Html.ActionLink("Add a Product", "CreateProduct", "BinProduct", new { @class = "btn btn-primary" })
+<div class="wireframe">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Bin Name</th>
+                <th></th>
+                <th>SKU</th>
+                <th align="center">Product Description</th>
+                <th>QTY in Bin</th>
+            </tr>
+        </thead>
+
+        @foreach (var i in Model.Inventory)
+        {
+            <tbody>
+                <tr>
+                    <td valign="middle">
+                        @if (i.BinName == null)
+                        {
+                            <div style="color:red">Orphaned</div>
+                        }
+                        @i.BinName
+                    </td>
+                    @if (i.BinId == 0)
+                    {
+                        <td>
+                            @Html.ActionLink("Move Product", "MoveProduct", "BinProduct", new { id = i.InventoryId }, new { @class = "btn btn-secondary", style = "font-size:smaller" })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.ActionLink("Edit Bin", "EditBin", "BinProduct", new { id = i.BinId }, new { @class = "btn btn-secondary", style = "font-size:smaller" })
+                            @Html.ActionLink("Delete", "DeleteBin", "BinProduct", new { id = i.BinId }, new { @class = "btn btn-danger", style = "font-size:smaller", onclick = "return confirm('Are you sure you want to delete this bin? Products will be orphaned.')" })
+                        </td>
+                    }
+
+                    <td>@i.SKU</td>
+                    <td valign="middle">@i.ProductDescription</td>
+                    @if (i.BinName == null)
+                    {
+                    <td style="color:red; font-size:smaller">Loose: @i.InventoryQuantity </td>
+                    }
+                    else
+                    {
+                        <td valign="middle">@i.InventoryQuantity</td>
+                    }
+
+                </tr>
+                
+            </tbody>
+        }
+    </table>

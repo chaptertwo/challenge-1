@@ -1,0 +1,51 @@
+﻿@model ScoutSFTChallenge.UI.Models.OrderVM
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2 style="text-align:center">Order Details</h2>
+@Html.ActionLink("Edit Order", "EditOrderLine", "Inventory", new { @class = "btn btn-primary" })
+<div class="wireframe">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Product SKU</th>
+                <th>Product Description</th>
+                <th>Quantity</th>
+                <th align="center">Price Per SKU</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+            @foreach (var ol in Model.OrderLines)
+            {
+
+                foreach (var p in Model.Products)
+                {
+                    if (ol.ProductId == p.ProductId)
+                    {
+                        <tr>
+                            <td valign="middle">
+                                @Model.Order.OrderNumber
+                            </td>
+                            <td>@p.SKU</td>
+                            <td>@p.ProductDescription</td>
+                            <td>@ol.OrderQuantity</td>
+                            <td>$@ol.PricePerLine</td>
+                        </tr>
+                    }
+
+                }
+
+
+            }
+
+        </tbody>
+
+    </table>
+    <a href="~/Inventory/AllOrders" class="btn btn-default">Back</a>
+</div>
+

@@ -1,0 +1,27 @@
+﻿@model ScoutSFTChallenge.UI.Models.BinProductVM
+@{
+    ViewBag.Title = "EditBin";
+}
+
+<h2 style="text-align:center">Create Bin</h2>
+<div class="container-fluid wireframe">
+    @using (Html.BeginForm("CreateBin", "BinProduct", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(a => a.Bin.BinName)
+                            @Html.TextBoxFor(a => a.Bin.BinName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(a => a.Bin.BinName, "", new { @style = "color:red" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div><button type="submit" class="pull-right btn btn-primary">Submit</button>
+            </div>
+        </div>
+    }
+</div>

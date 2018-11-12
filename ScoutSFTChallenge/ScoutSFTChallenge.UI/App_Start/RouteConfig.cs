@@ -12,7 +12,16 @@ namespace ScoutSFTChallenge.UI
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            //routes.MapRoute(
+            //    name: "DeleteProductFromBin",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "BinProduct", action = "DeleteProductFromBin", id = UrlParameter.Optional }
+            //);
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "Inventory", action = "Index", id = UrlParameter.Optional }
+            //);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
